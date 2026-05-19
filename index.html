@@ -1,0 +1,274 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Sabith 🎉</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      overflow:hidden;
+      height:100vh;
+      background:linear-gradient(135deg,#ff4d6d,#7b2cbf,#00b4d8);
+      background-size:400% 400%;
+      animation:bgMove 10s infinite alternate;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      text-align:center;
+    }
+
+    @keyframes bgMove{
+      0%{background-position:left;}
+      100%{background-position:right;}
+    }
+
+    .container{
+      position:relative;
+      width:90%;
+      max-width:900px;
+      padding:40px;
+      border-radius:30px;
+      background:rgba(255,255,255,0.12);
+      backdrop-filter:blur(15px);
+      box-shadow:0 0 40px rgba(0,0,0,0.3);
+      animation:fadeIn 2s ease;
+      z-index:10;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    h1{
+      font-size:4rem;
+      font-weight:700;
+      text-shadow:0 0 20px rgba(255,255,255,0.8);
+      animation:glow 2s infinite alternate;
+    }
+
+    @keyframes glow{
+      from{
+        text-shadow:0 0 10px #fff;
+      }
+      to{
+        text-shadow:0 0 30px #fff,0 0 50px #ffea00;
+      }
+    }
+
+    .name{
+      color:#ffe600;
+      font-size:5rem;
+    }
+
+    p{
+      margin-top:20px;
+      font-size:1.3rem;
+      line-height:2rem;
+    }
+
+    .btn{
+      margin-top:30px;
+      padding:15px 40px;
+      border:none;
+      border-radius:50px;
+      background:white;
+      color:#ff006e;
+      font-size:1.2rem;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.4s;
+      box-shadow:0 0 20px rgba(255,255,255,0.5);
+    }
+
+    .btn:hover{
+      transform:scale(1.1);
+      background:#ffe600;
+      color:black;
+    }
+
+    .emoji{
+      position:absolute;
+      font-size:2rem;
+      animation:float 8s linear infinite;
+      opacity:0.8;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(100vh) rotate(0deg);
+      }
+      100%{
+        transform:translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    .cake{
+      font-size:6rem;
+      margin-top:20px;
+      animation:bounce 2s infinite;
+    }
+
+    @keyframes bounce{
+      0%,100%{
+        transform:translateY(0);
+      }
+      50%{
+        transform:translateY(-15px);
+      }
+    }
+
+    .footer{
+      margin-top:25px;
+      font-size:1rem;
+      opacity:0.9;
+    }
+
+    canvas{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+    }
+
+    @media(max-width:768px){
+      h1{
+        font-size:2.5rem;
+      }
+
+      .name{
+        font-size:3rem;
+      }
+
+      p{
+        font-size:1rem;
+      }
+
+      .cake{
+        font-size:4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+  <h1>🎉 Happy Birthday 🎉</h1>
+
+  <div class="name">SABITH</div>
+
+  <div class="cake">🎂</div>
+
+  <p>
+    Wishing you unlimited happiness, crazy fun,
+    legendary moments and lots of cake 🍰✨<br> Ajk r bauna bolbona thak <br> treat jeno pai <br>
+    May your smile shine brighter than the stars lil bro 🌟
+  </p>
+
+  <button class="btn" onclick="showMessage()">
+    Click For Surprise 🎁
+  </button>
+
+  <div class="footer">
+    Made with ❤️ for Sabith
+  </div>
+</div>
+
+<script>
+  function showMessage(){
+    alert("🎊 Yo Sabith! 🎊\n\nVai tui atoh sundor kn? r koto meye potabi tui ? yham akhon valo hoye ja ,r treat nh dile tui gay,You are officially cooler, smarter and more awesome today 😎🔥\n\nHave the BEST birthday ever! 🎂🎁");
+  }
+
+  // Floating Emojis
+  const emojis = ["🎈","🎉","✨","🎂","🎁","🥳","💖","🍰"];
+
+  for(let i=0;i<25;i++){
+    let emoji=document.createElement("div");
+    emoji.classList.add("emoji");
+    emoji.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+
+    emoji.style.left=Math.random()*100+"vw";
+    emoji.style.animationDuration=(5+Math.random()*5)+"s";
+    emoji.style.fontSize=(20+Math.random()*40)+"px";
+
+    document.body.appendChild(emoji);
+  }
+
+  // Confetti Effect
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const pieces = [];
+
+  for(let i=0;i<150;i++){
+    pieces.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*6+2,
+      d:Math.random()*150,
+      color:`hsl(${Math.random()*360},100%,50%)`,
+      tilt:Math.random()*10-10
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    pieces.forEach((p,index)=>{
+      ctx.beginPath();
+      ctx.fillStyle=p.color;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+      ctx.fill();
+
+      p.y += Math.cos(p.d)+2;
+      p.x += Math.sin(p.d);
+
+      if(p.y > canvas.height){
+        pieces[index]={
+          ...p,
+          y:-10,
+          x:Math.random()*canvas.width
+        };
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  window.addEventListener("resize",()=>{
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
+```
